@@ -1,0 +1,61 @@
+<resources>
+    <string name="app_name">MojBudzetAndorid</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_ekran_glowny">EkranGlowny</string>
+    <string name="title_activity_przychody">Przychody</string>
+    <string name="title_activity_wydatki">Wydatki</string>
+    <string name="title_activity_statystyki">Statystyki</string>
+
+
+
+
+    <string-array name="kategorie">
+        <item>Alkohol</item>
+        <item>Dom</item>
+        <item>Dziecko</item>
+        <item>Elektronika</item>
+        <item>Firma</item>
+        <item>Jedzenie</item>
+        <item>Kultura</item>
+        <item>Moda</item>
+        <item>Motoryzacja</item>
+        <item>Rozrywka</item>
+        <item>Sport</item>
+        <item>Sztuka</item>
+        <item>Uroda</item>
+        <item>Usługi</item>
+        <item>Wypoczynek</item>
+        <item>Zdrowie</item>
+
+    </string-array>
+    <string-array name="Operacje">
+        <item>Wydatki</item>
+        <item>Wszystko</item>
+        <item>Przychody</item>
+    </string-array>
+
+
+    <string-array name="KategorieStatystyki">
+        <item>*</item>
+        <item>Alkohol</item>
+        <item>Dom</item>
+        <item>Dziecko</item>
+        <item>Elektronika</item>
+        <item>Firma</item>
+        <item>Jedzenie</item>
+        <item>Kultura</item>
+        <item>Moda</item>
+        <item>Motoryzacja</item>
+        <item>Rozrywka</item>
+        <item>Sport</item>
+        <item>Sztuka</item>
+        <item>Uroda</item>
+        <item>Usługi</item>
+        <item>Wypoczynek</item>
+        <item>Zdrowie</item>
+    </string-array>
+
+    <string name="title_activity_my_dialog">my_dialog</string>
+</resources>

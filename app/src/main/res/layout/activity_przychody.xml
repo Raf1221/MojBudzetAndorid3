@@ -1,0 +1,145 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.example.raf.mojbudzetandorid.Przychody">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/LayoutCena"
+        android:layout_below="@+id/LayoutKategoria"
+        android:layout_marginTop="7dp"
+        android:layout_alignRight="@+id/UwagiL"
+        android:layout_alignEnd="@+id/UwagiL">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/LayoutData"
+        android:layout_below="@+id/LayoutCena"
+        android:layout_marginTop="7dp" >
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/LayoutUwagi"
+        android:layout_below="@+id/LayoutData"
+        android:layout_marginTop="7dp"
+        android:weightSum="1">
+
+    </LinearLayout>
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dodaj"
+        android:id="@+id/DodajA"
+        android:onClick="dodajOperacjaPrzychod"
+        android:layout_above="@+id/PowrotA"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="70dp" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Powrot"
+        android:id="@+id/PowrotA"
+        android:layout_alignParentBottom="true"
+        android:onClick="Powrot"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Uwagi: "
+        android:id="@+id/UwagiL"
+        android:layout_weight="0.13"
+        android:onClick="DodajWydatek"
+        android:layout_below="@+id/DataWyswietla"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/UwagiPrzychod"
+        android:hint="Opis"
+        android:layout_weight="1"
+        android:layout_below="@+id/DataWyswietla"
+        android:layout_alignLeft="@+id/DataWyswietla"
+        android:layout_alignStart="@+id/DataWyswietla"
+        android:layout_alignRight="@+id/CenaPrzychod"
+        android:layout_alignEnd="@+id/CenaPrzychod" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Data"
+        android:id="@+id/Kalendarz_A"
+        android:layout_weight="0.00"
+        android:layout_alignBottom="@+id/DataWyswietla"
+        android:layout_toRightOf="@+id/DataWyswietla"
+        android:layout_toEndOf="@+id/DataWyswietla" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="date"
+        android:ems="10"
+        android:id="@+id/DataWyswietla"
+        android:hint="RRRR-MM-DD"
+        android:layout_alignTop="@+id/DataL"
+        android:layout_toRightOf="@+id/LayoutCena"
+        android:layout_toEndOf="@+id/LayoutCena" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Data:"
+        android:id="@+id/DataL"
+        android:layout_weight="0.00"
+        android:layout_marginTop="70dp"
+        android:layout_below="@+id/LayoutUwagi"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/CenaPrzychod"
+        android:layout_weight="1.1"
+        android:hint="Kwota[zł]"
+        android:layout_above="@+id/DataWyswietla"
+        android:layout_toRightOf="@+id/LayoutCena"
+        android:layout_toEndOf="@+id/LayoutCena" />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Powrot"
+        android:id="@+id/PowrotA"
+        android:layout_alignParentBottom="true"
+        android:onClick="Powrot"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Kwota:"
+        android:id="@+id/KwotaL"
+        android:layout_weight="1.1"
+        android:layout_alignTop="@+id/CenaPrzychod"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+</RelativeLayout>
