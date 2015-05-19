@@ -47,6 +47,18 @@
         android:layout_below="@+id/scrollView"
         android:layout_alignRight="@+id/scrollView"
         android:layout_alignEnd="@+id/scrollView"
-        android:onClick="showInputDialog" />
+        android:onClick="btnShowDialog" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Wykres"
+        android:id="@+id/BtnWykres"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentStart="false"
+        android:onClick="btnPokazWykres" />
 
 </RelativeLayout>

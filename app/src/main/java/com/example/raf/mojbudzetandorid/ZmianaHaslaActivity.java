@@ -6,21 +6,25 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
 
-public class EkranGlowny extends ActionBarActivity {
+public class ZmianaHaslaActivity extends ActionBarActivity {
+    private ZarzadcaBazy zarzadca= new ZarzadcaBazy(getBaseContext());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ekran_glowny);
+        setContentView(R.layout.activity_zmiana_hasla);
+        Button button = (Button) findViewById(R.id.button2);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_ekran_glowny, menu);
+        getMenuInflater().inflate(R.menu.menu_zmiana_hasla, menu);
         return true;
     }
 
@@ -39,19 +43,11 @@ public class EkranGlowny extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void Statystyki (View view) {
-        Intent Statystyki = new Intent("com.example.raf.mojbudzetandorid.Statystyki");
-        startActivity(Statystyki);
-    }
-
-    public void Wydatki(View view) {
-        Intent  Dodaj= new Intent("com.example.raf.mojbudzetandorid.Wydatki");
-        startActivity(Dodaj);
-    }
-
-    public void Przychody(View view) {
-        Intent DodajDochody = new Intent("com.example.raf.mojbudzetandorid.Przychody");
-        startActivity(DodajDochody);
+    public void zmienHaslo(View v) {
+        Intent PrzekEkranGlowny = new Intent(this,MainActivity.class);
+        EditText ed = (EditText) findViewById(R.id.editText);
+        zarzadca.aktualizujUzytownika(1,ed.getText().toString());
+        startActivity(PrzekEkranGlowny);
     }
 
 }

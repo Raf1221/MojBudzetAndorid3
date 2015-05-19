@@ -7,36 +7,36 @@
     tools:context="com.example.raf.mojbudzetandorid.EkranGlowny">
 
 
-    <Button
-        android:layout_width="175dp"
-        android:layout_height="wrap_content"
-        android:text="Przychody"
-        android:id="@+id/DodajA"
-        android:layout_marginTop="70dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:onClick="Przychody"/>
 
-    <Button
-        android:layout_width="175dp"
+
+    <ImageView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Wydatki"
-        android:id="@+id/WydatkiB"
+        android:id="@+id/imagePrzychody"
+        android:src="@drawable/przychody"
+        android:onClick="Przychody"
+        android:layout_marginBottom="292dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="175dp"
+        android:id="@+id/imageWydatki"
+        android:src="@drawable/wydatki"
         android:onClick="Wydatki"
-        android:layout_below="@+id/DodajA"
-        android:layout_marginTop="30dp"
         android:layout_centerVertical="true"
-        android:layout_alignLeft="@+id/StatystykiB"
-        android:layout_alignStart="@+id/StatystykiB"/>
+        android:layout_alignLeft="@+id/imagePrzychody"
+        android:layout_alignStart="@+id/imagePrzychody" />
 
-    <Button
-        android:layout_width="175dp"
-        android:layout_height="wrap_content"
-        android:text="Statystyki"
-        android:id="@+id/StatystykiB"
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="175dp"
+        android:id="@+id/imageStatystyki"
+        android:src="@drawable/statystyki"
         android:onClick="Statystyki"
-        android:layout_marginTop="30dp"
-        android:layout_below="@+id/WydatkiB"
-        android:layout_alignLeft="@+id/DodajA"
-        android:layout_alignStart="@+id/DodajA" />
+        android:layout_below="@+id/imageWydatki"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
 </RelativeLayout>

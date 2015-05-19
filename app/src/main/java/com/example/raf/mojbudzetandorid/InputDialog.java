@@ -1,23 +1,155 @@
 package com.example.raf.mojbudzetandorid;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.EditText;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.TextView;
+
+import java.text.SimpleDateFormat;
 
 /**
- * Created by Raf on 2015-04-29.
+ * Created by Raf on 2015-05-01.
  */
-public class InputDialog extends DialogFragment {
-    public  Dialog onCreateDialog(Bundle savedinstanceState){
-AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
+public class InputDialog extends DialogFragment implements  AdapterView.OnItemSelectedListener {
+    public static String DataOD;
+    public static String DataDO;
+    public static int KategoriaWyswietlania=00;
+    public static String TypWyswietlania;
+    Spinner spinner1;
+    Spinner spinner2;
+    TextView tv1;
+    TextView tv2;
+    Button filtruj;
+    Context context;
+    Button DataOd;
+    Button DataDo;
+    static String DialogboxTitle;
+    SimpleDateFormat curFormater = new SimpleDateFormat("yyyy-MM-dd");
+    ZarzadcaBazy zb=new ZarzadcaBazy(getActivity());
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-return null;
     }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+
+    public interface InputNameDialogListener{
+        void onFinishInputDialog(String inputText);
+    }
+    public InputDialog() {
+
+    }
+
+    public void setDialogTitle(String title) {
+        DialogboxTitle = title;
+    }
+
+    public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle saveInstanceState){
+
+         final ZarzadcaBazy zb=new ZarzadcaBazy(getActivity());
+        View view = inflater.inflate(
+                R.layout.input_dialog, container);
+
+        Statystyki.czyWlaczanyDialog=true;
+        tv1=(TextView)view.findViewById(R.id.OdT);
+        tv2=(TextView)view.findViewById(R.id.DoT);
+        /////////////////////////USTAWIENIE DATY NA DZISIAJ//////////////////////
+
+
+
+
+
+
+
+
+        /////////////////////////USTAWIENIE DATY NA DZISIAJ-30DNI//////////////////////
+
+        spinner1=(Spinner) view.findViewById(R.id.OperacjeS);
+        ArrayAdapter adapter=ArrayAdapter.createFromResource(getActivity(),R.array.Operacje,android.R.layout.simple_spinner_item);
+        spinner1.setAdapter(adapter);
+        spinner1.setOnItemSelectedListener(this);
+        spinner2=(Spinner)view.findViewById(R.id.KategorieStatystykiS);
+        filtruj=(Button) view.findViewById(R.id.FiltrujB);
+        ArrayAdapter adapter2=ArrayAdapter.createFromResource(getActivity(),R.array.KategorieStatystyki,android.R.layout.simple_spinner_item);
+        spinner2.setAdapter(adapter2);
+        spinner2.setOnItemSelectedListener(this);
+
+        getDialog().setTitle(DialogboxTitle);
+
+
+        filtruj .setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                /*try {
+                    Cursor k3 = zb.dajWszystkieOperacjeFiltruj(1);
+                    int rows=k3.getCount();
+                    int cols=k3.getColumnCount();
+                    //Toast.makeText(Statystyki.this, "liczba rows"+rows, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(Statystyki.this, "liczba cols"+cols, Toast.LENGTH_SHORT).show();
+                    k3.moveToFirst();
+
+
+
+
+
+                    for(int i=0;i<rows;i++){
+
+                        TableRow row=new TableRow(this);
+                        // row.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
+                        row.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
+                        row.setPadding(0,0,0,0);
+
+
+                        table_layout.addView(row);
+                        for(int j=0;j<cols;j++){
+                            TextView tv = new TextView(this);
+                            tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
+                                    TableRow.LayoutParams.WRAP_CONTENT));
+                            tv.setGravity(Gravity.CENTER);
+                            tv.setTextSize(16);
+                            tv.setPadding(0,0,0,0);
+
+                            tv.setText(k3.getString(j));
+
+                            row.addView(tv);
+
+                        }
+                        k3.moveToNext();
+
+                        try{
+                            table_layout.addView(row);
+                        }catch(Exception e){
+                            // Toast.makeText(Statystyki.this, "blad "+e, Toast.LENGTH_SHORT).show();
+                        }
+
+                        //table_layout.addView(row);
+                    }
+                }catch (Exception e){
+                    //Toast.makeText(Statystyki.this, "blad "+e, Toast.LENGTH_SHORT).show();
+                }*/
+
+                getDialog().dismiss();
+
+            }
+        });
+
+        return view;
+    }
+
+
+
+
 
 
 

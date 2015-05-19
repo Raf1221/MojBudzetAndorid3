@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,20 +24,27 @@
             android:layout_height="wrap_content"
             android:id="@+id/OdT"
             android:hint="Data od"
-            android:layout_weight="1"/>
+            android:layout_weight="0.10"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="OD"
+            android:id="@+id/button"
+            style="?android:attr/buttonStyleSmall" />
+
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/DoT"
             android:hint="Data do"
-            android:layout_weight="1"/>
+            android:layout_weight="0.09"/>
         <Button
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Show"
-            android:id="@+id/AkceptujB"
-            android:layout_weight="1"
+            android:text="DO"
+            android:id="@+id/DataDoB"
             android:onClick="Laduj"/>
 
 
@@ -50,14 +58,13 @@
         <Spinner
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/Operacje"
+            android:id="@+id/OperacjeS"
             android:layout_weight="1"/>
 
         <Spinner
-            android:layout_width="wrap_content"
+            android:layout_width="201dp"
             android:layout_height="wrap_content"
-            android:id="@+id/KategorieStatystyki"
-            android:layout_weight="1"/>
+            android:id="@+id/KategorieStatystykiS" />
 
     </LinearLayout>
 
@@ -65,11 +72,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Filtruj"
-        android:id="@+id/button"
+        android:id="@+id/FiltrujB"
         android:layout_below="@+id/LinearSpinnery"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:onClick=""/>
+        android:onClick="Zamknij"/>
 </LinearLayout>

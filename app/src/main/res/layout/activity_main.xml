@@ -43,16 +43,7 @@
         android:layout_below="@+id/LogujB"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
+        android:onClick="ZmianaHasla"
         />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Small Text"
-        android:id="@+id/textView1"
-        android:layout_below="@+id/ZmianaB"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

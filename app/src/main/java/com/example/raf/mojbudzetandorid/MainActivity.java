@@ -1,37 +1,35 @@
 package com.example.raf.mojbudzetandorid;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
-import android.support.v7.app.ActionBarActivity;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.raf.mojbudzetandorid.utils.DatabaseUtils;
 
-public class MainActivity extends ActionBarActivity {
-ZarzadcaBazy zb=new ZarzadcaBazy(this);
+
+public class MainActivity extends Activity {
+    private ZarzadcaBazy zb ;
+    private DatabaseUtils db;
+    private SQLiteDatabase baza;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        try{
-            //ten użytkownik tworzy się tyllko raz przy pierwszym uruchamianiu programu
-           // zb.dodajUser(1,"");
-           // Toast.makeText(MainActivity.this, "uzytkownik jest", Toast.LENGTH_SHORT).show();
-        }catch(Exception e){
-            //Toast.makeText(MainActivity.this, "blac " + e, Toast.LENGTH_SHORT).show();
-            TextView tv=(TextView) findViewById(R.id.textView1);
-            tv.setText("blad"+e);
-            //Toast.makeText(Login.this,"blac "+e,Toast.LENGTH_SHORT).show();
-            //
-            // tv.setText("podany uytkownik juz jest ");
-        }
+        String[] kategorie = getResources().getStringArray(R.array.kategorie);
+        zb = new ZarzadcaBazy(getBaseContext());
+        baza = zb.getWritableDatabase();
+//        baza = this.openOrCreateDatabase("BudzetDB3.db", MODE_ENABLE_WRITE_AHEAD_LOGGING, null);
+        zb.uzupelnijKategorie(kategorie,baza);
+//        zb.dodajUser(1, "a", baza);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -54,17 +52,16 @@ ZarzadcaBazy zb=new ZarzadcaBazy(this);
 
         return super.onOptionsItemSelected(item);
     }
+
     public void Loguj(View view) {
 
-        TextView tx=(TextView) findViewById(R.id.LogowanieL);
-        Cursor k=zb.dajWszystkie();
+        Cursor k=zb.dajWszystkie(baza);
         k.moveToFirst();
-        String hasloUzytkownika = k.getString(1);
+        String userPass = k.getString(k.getColumnIndexOrThrow("Haslo"));
         EditText ed = (EditText) findViewById(R.id.HasloPW);
-        String haslo=ed.getText().toString();
-
+        String givenPass = ed.getText().toString();
         try{
-            if(haslo.equals(hasloUzytkownika)){
+            if(userPass.equals(givenPass)){
 
                 Intent PrzekEkranGlowny = new Intent("com.example.raf.mojbudzetandorid.EkranGlowny");
                 startActivity(PrzekEkranGlowny);
@@ -74,8 +71,10 @@ ZarzadcaBazy zb=new ZarzadcaBazy(this);
         }catch(Exception e){
             Toast.makeText(this,"blad "+e,Toast.LENGTH_SHORT).show();
         }
+    }
 
-
-
+    public void ZmianaHasla(View view) {
+        Intent DodajDochody = new Intent("com.example.raf.mojbudzetandorid.ZmianaHaslaActivity");
+        startActivity(DodajDochody);
     }
 }

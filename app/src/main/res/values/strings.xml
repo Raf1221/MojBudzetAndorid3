@@ -8,7 +8,7 @@
     <string name="title_activity_wydatki">Wydatki</string>
     <string name="title_activity_statystyki">Statystyki</string>
 
-
+    <string name="str_btn_chart">Wykres Kołowy</string>
 
 
     <string-array name="kategorie">
@@ -28,6 +28,7 @@
         <item>Usługi</item>
         <item>Wypoczynek</item>
         <item>Zdrowie</item>
+        <item>Przychod</item>
 
     </string-array>
     <string-array name="Operacje">
@@ -58,4 +59,6 @@
     </string-array>
 
     <string name="title_activity_my_dialog">my_dialog</string>
+    <string name="title_activity_zmiana_hasla">ZmianaHaslaActivity</string>
+    <string name="title_activity_wykres_kolowy">WykresKolowy</string>
 </resources>

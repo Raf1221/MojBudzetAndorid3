@@ -86,7 +86,9 @@
         android:text="Data"
         android:id="@+id/Kalendarz_A"
         android:layout_weight="0.00"
-        android:layout_alignBottom="@+id/DataWyswietla"
+        android:layout_above="@+id/UwagiPrzychod"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_toRightOf="@+id/DataWyswietla"
         android:layout_toEndOf="@+id/DataWyswietla" />
 
@@ -98,8 +100,8 @@
         android:id="@+id/DataWyswietla"
         android:hint="RRRR-MM-DD"
         android:layout_alignTop="@+id/DataL"
-        android:layout_toRightOf="@+id/LayoutCena"
-        android:layout_toEndOf="@+id/LayoutCena" />
+        android:layout_alignLeft="@+id/CenaPrzychod"
+        android:layout_alignStart="@+id/CenaPrzychod" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -122,8 +124,7 @@
         android:layout_weight="1.1"
         android:hint="Kwota[zł]"
         android:layout_above="@+id/DataWyswietla"
-        android:layout_toRightOf="@+id/LayoutCena"
-        android:layout_toEndOf="@+id/LayoutCena" />
+        android:layout_centerHorizontal="true" />
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -137,9 +138,11 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Kwota:"
-        android:id="@+id/KwotaL"
+        android:id="@+id/KwotaLP"
         android:layout_weight="1.1"
-        android:layout_alignTop="@+id/CenaPrzychod"
+        android:layout_above="@+id/Kalendarz_A"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+
 </RelativeLayout>

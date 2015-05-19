@@ -1,10 +1,11 @@
 package com.example.raf.mojbudzetandorid;
-import android.support.v7.app.ActionBarActivity;
+
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,18 +23,19 @@ import java.util.Calendar;
 
 
 public class Wydatki extends ActionBarActivity implements AdapterView.OnItemSelectedListener{
-    ZarzadcaBazy zb=new ZarzadcaBazy(this);
+    ZarzadcaBazy zb = new ZarzadcaBazy(getBaseContext());
+    private SQLiteDatabase baza;
     Spinner spinner;
     Button button;
     EditText Data;
     int rok,miesiac,dzien;
     static final int DIALOG_ID=0;
-    int KategriaID;
     String DataWydatku;
     float Cena;
     String Uwagi;
     EditText CenaET,DataET,UwagiET;
 
+    int num;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,42 +44,18 @@ public class Wydatki extends ActionBarActivity implements AdapterView.OnItemSele
         CenaET=(EditText)findViewById(R.id.CenaWydatek);
         DataET=(EditText)findViewById(R.id.DataWyswietla);
         UwagiET=(EditText)findViewById(R.id.UwagiWydatek);
-
+        baza= this.openOrCreateDatabase("BudzetDB3.db", MODE_ENABLE_WRITE_AHEAD_LOGGING, null);
 
         ArrayAdapter adapter=ArrayAdapter.createFromResource(this,R.array.kategorie,android.R.layout.simple_spinner_item);
         spinner.setAdapter(adapter);
+
         spinner.setOnItemSelectedListener(this);
         final Calendar cal=Calendar.getInstance();
         rok=cal.get(Calendar.YEAR);
         miesiac=cal.get(Calendar.MONTH);
         dzien=cal.get(Calendar.DAY_OF_MONTH);
-
+        int spinnerPostion = adapter.getPosition(R.array.kategorie);
         DajKalendarz();
-        try{
-            /*zb.dodajKategoria(1,"Alkohol");
-            zb.dodajKategoria(2,"Dom");
-            zb.dodajKategoria(3,"Dziecko");
-            zb.dodajKategoria(4,"Elektronika");
-            zb.dodajKategoria(5,"Firma");
-            zb.dodajKategoria(6,"Jedzenie");
-            zb.dodajKategoria(7,"Kultura");
-            zb.dodajKategoria(8,"Moda");
-            zb.dodajKategoria(9,"Motoryzacja");
-            zb.dodajKategoria(10,"Rozrywka");
-            zb.dodajKategoria(11,"Sport");
-            zb.dodajKategoria(12,"Sztuka");
-            zb.dodajKategoria(13,"Uroda");
-            zb.dodajKategoria(14,"Usługi");
-            zb.dodajKategoria(15,"Wypoczynek");
-            zb.dodajKategoria(16,"Zdrowie");
-            zb.dodajKategoria(17,"Przychod");*/
-            //Toast.makeText(this,"Została wybrała kategoria",Toast.LENGTH_SHORT).show();
-
-
-        }catch(Exception e){
-            Toast.makeText(this,"blad: "+e,Toast.LENGTH_SHORT).show();
-        }
-
     }
 
     public void DajKalendarz(){
@@ -109,7 +87,6 @@ public class Wydatki extends ActionBarActivity implements AdapterView.OnItemSele
                     rok=year;
                     miesiac=monthOfYear+1;
                     dzien=dayOfMonth;
-                    // Toast.makeText(DodajWydatek.this,rok+"-"+miesiac+"-"+dzien,Toast.LENGTH_LONG).show();
                     Data=(EditText)findViewById(R.id.DataWyswietla);
                     Data.setText(rok+"-"+miesiac+"-"+dzien);
 
@@ -146,7 +123,10 @@ public class Wydatki extends ActionBarActivity implements AdapterView.OnItemSele
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         TextView myText=(TextView) view;
         if(myText.getText()!=null){
-            Toast.makeText(this,"Wybrano"+myText.getText(),Toast.LENGTH_SHORT).show();
+
+           // Toast.makeText(this,"Wybrano "+myText.getText()+" "+position,Toast.LENGTH_SHORT).show();
+            num=position+1;
+           // Toast.makeText(this,"num "+num,Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -156,50 +136,13 @@ public class Wydatki extends ActionBarActivity implements AdapterView.OnItemSele
 
     }
     public void dodajOperacjaWydatek(View view){
-        switch (spinner.getSelectedItem().toString()){
-            case "Alkohol":
-                KategriaID=1;break;
-            //Toast.makeText(DodajWydatek.this,"Wybrano alkohol",Toast.LENGTH_LONG).show();
-            case "Dom":
-                KategriaID=2; break;
-            case "Dziecko":
-                KategriaID=3; break;
-            case "Elektronika":
-                KategriaID=4; break;
-            case "Firma":
-                KategriaID=5; break;
-            case "Jedzenie":
-                KategriaID=6; break;
-            case "Kultura":
-                KategriaID=7; break;
-            case "Moda":
-                KategriaID=8; break;
-            case "Motoryzacja":
-                KategriaID=9; break;
-            case "Rozrywka":
-                KategriaID=10; break;
-            case "Sport":
-                KategriaID=11; break;
-            case "Sztuka":
-                KategriaID=12; break;
-            case "Uroda":
-                KategriaID=13; break;
-            case "Usługi":
-                KategriaID=14; break;
-            case "Wypoczynek":
-                KategriaID=15; break;
-            case "Zdrowie":
-                KategriaID=16; break;
-            default:
-                Toast.makeText(Wydatki.this,"Kategoria nie została wybrana",Toast.LENGTH_LONG).show(); break;
-        }
         Cena=Float.parseFloat(CenaET.getText().toString());
         DataWydatku=DataET.getText().toString();
         Uwagi=UwagiET.getText().toString();
         String typ="Wydatek";
         try{
             //zb.dodajWydatek(1, Date.valueOf("2008-9-2"),5000,"pensja xd");
-            zb.dodajOperacje(KategriaID, Date.valueOf(DataWydatku),Cena,Uwagi,typ);
+            zb.dodajOperacje(num, Date.valueOf(DataWydatku),Cena,Uwagi,typ,baza);
             Toast.makeText(Wydatki.this,"Udalo sie dodac wydatek",Toast.LENGTH_LONG).show();
         }catch(Exception e){
             Toast.makeText(Wydatki.this,""+e,Toast.LENGTH_LONG).show();

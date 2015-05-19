@@ -3,8 +3,9 @@ package com.example.raf.mojbudzetandorid;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,9 +28,9 @@ public class Przychody extends ActionBarActivity{
     String Uwagi;
     Button button;
     static final int DIALOG_ID=0;
-    ZarzadcaBazy zb=new ZarzadcaBazy(this);
+    ZarzadcaBazy zb= new ZarzadcaBazy(getBaseContext());
     int KategoriaID;
-
+    private SQLiteDatabase baza;
 
 
 
@@ -40,7 +41,7 @@ public class Przychody extends ActionBarActivity{
         CenaETa=(EditText)findViewById(R.id.CenaPrzychod);
         DataETa=(EditText)findViewById(R.id.DataWyswietla);
         UwagiETa=(EditText)findViewById(R.id.UwagiPrzychod);
-
+        baza = this.openOrCreateDatabase("BudzetDB3.db", MODE_ENABLE_WRITE_AHEAD_LOGGING, null);
 
         final Calendar cal=Calendar.getInstance();
         rok=cal.get(Calendar.YEAR);
@@ -120,7 +121,7 @@ public class Przychody extends ActionBarActivity{
         String typ="Przychod";
         try{
 
-            zb.dodajOperacje(KategoriaID, Date.valueOf(DataPrzychodu),Cena,Uwagi,typ);
+            zb.dodajOperacje(KategoriaID, Date.valueOf(DataPrzychodu),Cena,Uwagi,typ,baza);
             Toast.makeText(Przychody.this,"Udalo sie dodac przychod",Toast.LENGTH_LONG).show();
         }catch(Exception e){
             Toast.makeText(Przychody.this,""+e,Toast.LENGTH_LONG).show();
