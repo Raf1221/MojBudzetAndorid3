@@ -63,6 +63,7 @@ public class InputDialog extends DialogFragment implements  AdapterView.OnItemSe
         Statystyki.czyWlaczanyDialog=true;
         tv1=(TextView)view.findViewById(R.id.OdT);
         tv2=(TextView)view.findViewById(R.id.DoT);
+        tv1.setText("siema");
         /////////////////////////USTAWIENIE DATY NA DZISIAJ//////////////////////
 
 

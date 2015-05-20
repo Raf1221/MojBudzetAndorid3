@@ -16,7 +16,6 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TableRow.LayoutParams;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.achartengine.ChartFactory;
 import org.achartengine.model.CategorySeries;
@@ -53,7 +52,6 @@ public class Statystyki extends ActionBarActivity {
         };
         btnWykres.setOnClickListener(clickListener);
         baseContext = getBaseContext();
-        Toast.makeText(Statystyki.this, "liczba rows", Toast.LENGTH_SHORT).show();
     }
 
     private void openChart() {
@@ -96,7 +94,7 @@ public class Statystyki extends ActionBarActivity {
         }
         CategorySeries serieDystrybucji = new CategorySeries("Dane z tabeli");
         for (int i = 0; i < dystrybucja.length; i++) {
-            serieDystrybucji.add(code[i], dystrybucja[i]);
+            serieDystrybucji.add(code[i]+" "+dystrybucja[i]+" PLN", dystrybucja[i]);
         }
         DefaultRenderer podstawowyRender = new DefaultRenderer();
         for (int i = 0; i < dystrybucja.length; i++) {
@@ -188,7 +186,7 @@ public class Statystyki extends ActionBarActivity {
     private void showInputNameDialog() {
         FragmentManager manager = getFragmentManager();
         InputDialog inputDialog = new InputDialog();
-        inputDialog.setCancelable(false);
+        inputDialog.setCancelable(true);
         inputDialog.setDialogTitle("Wybierz kryteria");
         inputDialog.show(manager, "Input Dialog");
     }
