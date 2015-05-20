@@ -12,7 +12,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TableRow.LayoutParams;
@@ -24,12 +23,13 @@ import org.achartengine.model.CategorySeries;
 import org.achartengine.renderer.DefaultRenderer;
 import org.achartengine.renderer.SimpleSeriesRenderer;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class Statystyki extends ActionBarActivity {
     public static TableLayout table_layout;
     ZarzadcaBazy zb = new ZarzadcaBazy(this);
-    Spinner Operacjespin;
-    Spinner KategorieStatykispin;
     public static boolean czyWlaczanyDialog = true;
     public static Context baseContext;
 
@@ -57,16 +57,44 @@ public class Statystyki extends ActionBarActivity {
     }
 
     private void openChart() {
-        String[] code = new String[]{
-                "Eclair & Older", "Froyo", "Gingerbread", "Honeycomb",
-                "IceCream Sandwich", "Jelly Bean"
-        };
+        List<String> codeI = new ArrayList<String>();
+        List<Double> dystrybucjaI = new ArrayList<Double>();
 
-        double[] dystrybucja = {3.9, 12.9, 55.8, 1.9, 23.7, 1.8};
+        for (int i = 0, j = table_layout.getChildCount(); i < j; i++) {
+            View view = table_layout.getChildAt(i);
+            TextView temp = null;
+            if (view instanceof TableRow) {
+                TableRow t = (TableRow) view;
+                for (int k = 0, l = t.getChildCount(); k < l; k++) {
+                    TextView text = (TextView) t.getChildAt(k);
+                    if (!text.getText().equals("Przychod") & (k % 5) == 0) {
+                        codeI.add(text.getText().toString());
+                    }
+                    if(k==2) {
+                        temp = (TextView) t.getChildAt(k - 2);
+                    }
+                    if(temp!=null && !temp.getText().equals("Przychod") & k!=0 & (k%2)==0 & k!=4){
+                        dystrybucjaI.add(Double.valueOf(text.getText().toString()));
+                    }
+                }
+            }
+        }
+        boolean prawda = codeI.size()==dystrybucjaI.size() ? true : false ;
+        String[] code = new String[codeI.size()];
+        for (int i =0;i<codeI.size();i++) {
+            code[i]= codeI.get(i);
+        }
 
-        int[] kolory = {Color.BLUE, Color.MAGENTA, Color.GREEN, Color.CYAN, Color.RED,
-                Color.YELLOW};
-        CategorySeries serieDystrybucji = new CategorySeries("Dystrybucje androida na 01.10.2012");
+        double[] dystrybucja = new double[dystrybucjaI.size()];
+        for (int i =0;i<dystrybucjaI.size();i++) {
+            dystrybucja[i]= dystrybucjaI.get(i);
+        }
+        int[] kolory = new int[dystrybucjaI.size()];
+        for (int i =0;i<dystrybucjaI.size();i++) {
+            int RGB = 0xff + 1;
+            kolory[i]= Color.rgb((int)Math.floor(Math.random()*RGB),(int)Math.floor(Math.random()*RGB),(int)Math.floor(Math.random()*RGB));
+        }
+        CategorySeries serieDystrybucji = new CategorySeries("Dane z tabeli");
         for (int i = 0; i < dystrybucja.length; i++) {
             serieDystrybucji.add(code[i], dystrybucja[i]);
         }
@@ -77,6 +105,8 @@ public class Statystyki extends ActionBarActivity {
             renderSerii.setDisplayChartValues(true);
             podstawowyRender.addSeriesRenderer(renderSerii);
         }
+        podstawowyRender.setBackgroundColor(Color.BLACK);
+        podstawowyRender.setApplyBackgroundColor(true);
         podstawowyRender.setChartTitle("Wykres kołowy");
         podstawowyRender.setChartTitleTextSize(30);
         podstawowyRender.setLabelsTextSize(30);
@@ -116,22 +146,15 @@ public class Statystyki extends ActionBarActivity {
     }
 
     public void budujTabelke() {
-
         try {
             Cursor k3 = zb.dajWszystkieOperacje();
             int rows = k3.getCount();
             int cols = k3.getColumnCount();
             k3.moveToFirst();
-
-
             for (int i = 0; i < rows; i++) {
-
                 TableRow row = new TableRow(this);
-                // row.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
                 row.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
                 row.setPadding(0, 0, 0, 0);
-
-
                 table_layout.addView(row);
                 for (int j = 0; j < cols; j++) {
                     TextView tv = new TextView(this);
@@ -152,24 +175,15 @@ public class Statystyki extends ActionBarActivity {
                 try {
                     table_layout.addView(row);
                 } catch (Exception e) {
-                    // Toast.makeText(Statystyki.this, "blad "+e, Toast.LENGTH_SHORT).show();
                 }
-
-                //table_layout.addView(row);
             }
         } catch (Exception e) {
-            //Toast.makeText(Statystyki.this, "blad "+e, Toast.LENGTH_SHORT).show();
         }
-
     }
-    /////////////////////////////////////////////////////////////////////////////////////
-
 
     public void btnShowDialog(View view) {
         showInputNameDialog();
-
     }
-
 
     private void showInputNameDialog() {
         FragmentManager manager = getFragmentManager();
@@ -177,19 +191,5 @@ public class Statystyki extends ActionBarActivity {
         inputDialog.setCancelable(false);
         inputDialog.setDialogTitle("Wybierz kryteria");
         inputDialog.show(manager, "Input Dialog");
-
-       /* InputNameDialogFragment inputNameDialog = new InputNameDialogFragment();
-        inputNameDialog.setCancelable(false);
-        inputNameDialog.setDialogTitle("Enter Name");
-        inputNameDialog.show(fragmentManager, "Input Dialog");*/
     }
-
-    public void btnCloseDialog(View view) {
-
-    }
-
-    private void closeInputDialog() {
-
-    }
-
 }
