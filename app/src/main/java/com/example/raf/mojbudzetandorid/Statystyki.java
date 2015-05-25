@@ -16,6 +16,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TableRow.LayoutParams;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.achartengine.ChartFactory;
 import org.achartengine.model.CategorySeries;
@@ -40,7 +41,6 @@ public class Statystyki extends ActionBarActivity {
         final Button button = (Button) findViewById(R.id.BtnWykres);
         table_layout = (TableLayout) findViewById(R.id.tableLayout1);
         budujTabelke();
-
 
         Button btn = (Button) findViewById(R.id.filtrujB);
         Button btnWykres = (Button) findViewById(R.id.BtnWykres);
@@ -68,33 +68,33 @@ public class Statystyki extends ActionBarActivity {
                     if (!text.getText().equals("Przychod") & (k % 5) == 0) {
                         codeI.add(text.getText().toString());
                     }
-                    if(k==2) {
+                    if (k == 2) {
                         temp = (TextView) t.getChildAt(k - 2);
                     }
-                    if(temp!=null && !temp.getText().equals("Przychod") & k!=0 & (k%2)==0 & k!=4){
+                    if (temp != null && !temp.getText().equals("Przychod") & k != 0 & (k % 2) == 0 & k != 4) {
                         dystrybucjaI.add(Double.valueOf(text.getText().toString()));
                     }
                 }
             }
         }
-        boolean prawda = codeI.size()==dystrybucjaI.size() ? true : false ;
+        boolean prawda = codeI.size() == dystrybucjaI.size() ? true : false;
         String[] code = new String[codeI.size()];
-        for (int i =0;i<codeI.size();i++) {
-            code[i]= codeI.get(i);
+        for (int i = 0; i < codeI.size(); i++) {
+            code[i] = codeI.get(i);
         }
 
         double[] dystrybucja = new double[dystrybucjaI.size()];
-        for (int i =0;i<dystrybucjaI.size();i++) {
-            dystrybucja[i]= dystrybucjaI.get(i);
+        for (int i = 0; i < dystrybucjaI.size(); i++) {
+            dystrybucja[i] = dystrybucjaI.get(i);
         }
         int[] kolory = new int[dystrybucjaI.size()];
-        for (int i =0;i<dystrybucjaI.size();i++) {
+        for (int i = 0; i < dystrybucjaI.size(); i++) {
             int RGB = 0xff + 1;
-            kolory[i]= Color.rgb((int)Math.floor(Math.random()*RGB),(int)Math.floor(Math.random()*RGB),(int)Math.floor(Math.random()*RGB));
+            kolory[i] = Color.rgb((int) Math.floor(Math.random() * RGB), (int) Math.floor(Math.random() * RGB), (int) Math.floor(Math.random() * RGB));
         }
         CategorySeries serieDystrybucji = new CategorySeries("Dane z tabeli");
         for (int i = 0; i < dystrybucja.length; i++) {
-            serieDystrybucji.add(code[i]+" "+dystrybucja[i]+" PLN", dystrybucja[i]);
+            serieDystrybucji.add(code[i] + " " + dystrybucja[i] + " PLN", dystrybucja[i]);
         }
         DefaultRenderer podstawowyRender = new DefaultRenderer();
         for (int i = 0; i < dystrybucja.length; i++) {
@@ -176,6 +176,51 @@ public class Statystyki extends ActionBarActivity {
                 }
             }
         } catch (Exception e) {
+        }
+    }
+
+    public void budujTabelke(String dataOd, String dataDo, Object typ, Object kategoria) {
+        try {
+            table_layout.removeAllViews();
+            if (dataOd.equals("")) {
+                Toast.makeText(getApplicationContext(), "Data od jest błędna", Toast.LENGTH_LONG).show();
+            } else if (dataDo.equals("")) {
+                Toast.makeText(getApplicationContext(), "Data do jest błędna", Toast.LENGTH_LONG).show();
+            } else {
+
+                Cursor k3 = zb.dajWszystkieOperacjeFiltruj(dataOd, dataDo, (String) typ, (String) kategoria,MainActivity.baza);
+                int rows = k3.getCount();
+                int cols = k3.getColumnCount();
+                k3.moveToFirst();
+                for (int i = 0; i < rows; i++) {
+                    TableRow row = new TableRow(baseContext);
+                    row.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+                    row.setPadding(0, 0, 0, 0);
+                    table_layout.addView(row);
+                    for (int j = 0; j < cols; j++) {
+                        TextView tv = new TextView(baseContext);
+                        tv.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,
+                                LayoutParams.WRAP_CONTENT));
+                        tv.setGravity(Gravity.CENTER);
+                        tv.setTextSize(14);
+                        tv.setPadding(0, 0, 0, 0);
+                        tv.setText(k3.getString(j));
+                        if (k3.getString(j).equals("Wydatek")) {
+                            row.setBackgroundColor(Color.rgb(255, 102, 102));
+                        }
+                        row.addView(tv);
+
+                    }
+                    k3.moveToNext();
+
+                    try {
+                        table_layout.addView(row);
+                    } catch (Exception e) {
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

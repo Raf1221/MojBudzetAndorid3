@@ -24,8 +24,8 @@ public class InputDialog extends DialogFragment implements  AdapterView.OnItemSe
     public static String TypWyswietlania;
     Spinner spinner1;
     Spinner spinner2;
-    TextView tv1;
-    TextView tv2;
+    public TextView tv1;
+    public TextView tv2;
     Button filtruj;
     Context context;
     Button DataOd;
@@ -55,15 +55,13 @@ public class InputDialog extends DialogFragment implements  AdapterView.OnItemSe
     }
 
     public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle saveInstanceState){
-
-         final ZarzadcaBazy zb=new ZarzadcaBazy(getActivity());
+        ZarzadcaBazy zb=new ZarzadcaBazy(getActivity());
         View view = inflater.inflate(
                 R.layout.input_dialog, container);
 
         Statystyki.czyWlaczanyDialog=true;
         tv1=(TextView)view.findViewById(R.id.OdT);
         tv2=(TextView)view.findViewById(R.id.DoT);
-        tv1.setText("siema");
         /////////////////////////USTAWIENIE DATY NA DZISIAJ//////////////////////
 
 
@@ -140,6 +138,16 @@ public class InputDialog extends DialogFragment implements  AdapterView.OnItemSe
                     //Toast.makeText(Statystyki.this, "blad "+e, Toast.LENGTH_SHORT).show();
                 }*/
 
+                Statystyki stat = new Statystyki();
+                String typ = spinner1.getSelectedItem().toString();
+                String kategoria = spinner2.getSelectedItem().toString();
+                if(kategoria.equals("*")){
+                    kategoria= "IS NOT NULL";
+                }
+                if(!typ.equals("Wydatek")){
+                    typ="IS NOT NULL";
+                }
+                stat.budujTabelke(tv1.getText().toString(),tv2.getText().toString(),typ,kategoria);
                 getDialog().dismiss();
 
             }

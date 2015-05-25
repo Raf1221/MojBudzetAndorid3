@@ -32,7 +32,7 @@
 
     </string-array>
     <string-array name="Operacje">
-        <item>Wydatki</item>
+        <item>Wydatek</item>
         <item>Wszystko</item>
         <item>Przychody</item>
     </string-array>

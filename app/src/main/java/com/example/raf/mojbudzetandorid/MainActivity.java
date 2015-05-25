@@ -17,7 +17,7 @@ import com.example.raf.mojbudzetandorid.utils.DatabaseUtils;
 public class MainActivity extends Activity {
     private ZarzadcaBazy zb ;
     private DatabaseUtils db;
-    private SQLiteDatabase baza;
+    public static SQLiteDatabase baza;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

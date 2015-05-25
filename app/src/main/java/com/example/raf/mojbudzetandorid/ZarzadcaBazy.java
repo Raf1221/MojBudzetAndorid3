@@ -39,6 +39,7 @@ public class ZarzadcaBazy extends SQLiteOpenHelper {
                 "Kwota float," +
                 "Opis TEXT," +
                 "Typ TEXT);");
+        baza = db;
     }
 
     @Override
@@ -143,11 +144,15 @@ public class ZarzadcaBazy extends SQLiteOpenHelper {
         return kursor;
     }
 
-    public Cursor dajWszystkieOperacjeFiltruj(int kategoria) {
+    public Cursor dajWszystkieOperacjeFiltruj(String dataOd, String dataDo, String typ, String kategoria, SQLiteDatabase baza) {
 
         String[] kolumny = {"k.Nazwa", "o.Data", "o.Kwota", "o.Opis"};
-        SQLiteDatabase db = getReadableDatabase();
-        Cursor kursor = db.rawQuery("select k.Nazwa,o.Data,o.Kwota,o.Opis from Operacja o join Kategoria k on o.Kategoria_id=k.Id_k where k.Id='" + kategoria + "' by data;", null);
+        SQLiteDatabase db = baza;
+        Cursor kursor = db.rawQuery("select k.Nazwa,o.Data,o.Kwota,o.Opis,o.Typ " +
+                "from Operacja o join Kategoria k on o.Kategoria_id=k.Id_k " +
+                "where k.Nazwa='" + kategoria + "' " +
+                "and o.Data BETWEEN Datetime('"+dataOd+"') and Datetime('"+dataDo+"') " +
+                "and o.Typ='"+typ+"';", null);
         return kursor;
 
 
