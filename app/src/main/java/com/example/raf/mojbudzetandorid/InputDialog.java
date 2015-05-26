@@ -13,6 +13,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 /**
  * Created by Raf on 2015-05-01.
@@ -63,7 +64,31 @@ public class InputDialog extends DialogFragment implements  AdapterView.OnItemSe
         tv1=(TextView)view.findViewById(R.id.OdT);
         tv2=(TextView)view.findViewById(R.id.DoT);
         /////////////////////////USTAWIENIE DATY NA DZISIAJ//////////////////////
+        int rokP,miesiacP,dzienP;
+        int rok,miesiac,dzien;
 
+        Calendar cal2=Calendar.getInstance();
+        cal2.add(Calendar.DAY_OF_MONTH,-30);
+        rokP=cal2.get(Calendar.YEAR);
+        miesiacP=cal2.get(Calendar.MONTH)+1;
+        dzienP=cal2.get(Calendar.DAY_OF_MONTH);
+        if(miesiacP<10){
+            //tv1.setText("2015-05-25");
+            tv1.setText(rokP+"-0"+miesiacP+"-"+dzienP);
+        }else{
+            tv1.setText(rokP+"-"+miesiacP+"-"+dzienP);
+        }
+
+        Calendar cal=Calendar.getInstance();
+        rok=cal.get(Calendar.YEAR);
+        miesiac=cal.get(Calendar.MONTH)+1;
+        dzien=cal.get(Calendar.DAY_OF_MONTH)+1;
+
+        if(miesiac<10){
+            tv2.setText(rok+"-0"+miesiac+"-"+dzien);
+        }else{
+            tv2.setText(rok+"-"+miesiac+"-"+dzien);
+        }
 
 
 
