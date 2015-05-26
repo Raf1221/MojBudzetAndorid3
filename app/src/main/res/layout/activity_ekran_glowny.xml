@@ -29,14 +29,14 @@
         android:layout_alignLeft="@+id/imagePrzychody"
         android:layout_alignStart="@+id/imagePrzychody" />
 
-    <ImageView
+    <Button
         android:layout_width="wrap_content"
-        android:layout_height="175dp"
-        android:id="@+id/imageStatystyki"
-        android:src="@drawable/statystyki"
-        android:onClick="Statystyki"
+        android:layout_height="wrap_content"
+        android:text="Statystyki"
+        android:id="@+id/button3"
         android:layout_below="@+id/imageWydatki"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="65dp"
+        android:onClick="Statystyki" />
 
 </RelativeLayout>
