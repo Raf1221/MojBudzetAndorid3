@@ -4,7 +4,8 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.example.raf.mojbudzetandorid.Statystyki">
+    tools:context="com.example.raf.mojbudzetandorid.Statystyki"
+    android:background="@drawable/background3">
 
     <ScrollView
         android:layout_width="fill_parent"
@@ -32,35 +33,36 @@
 
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="108dp"
         android:layout_height="wrap_content"
         android:text="Powrot"
         android:id="@+id/PowrotSB"
         android:layout_alignParentBottom="true"
         android:onClick="Powrot"
-        />
+        android:textSize="15dp" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="112dp"
         android:layout_height="wrap_content"
         android:text="Filtruj"
         android:id="@+id/filtrujB"
         android:onClick="btnShowDialog"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:textSize="15dp" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
+        android:layout_width="108dp"
         android:layout_height="wrap_content"
         android:text="Wykres"
         android:id="@+id/BtnWykres"
+        android:onClick="btnPokazWykres"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentEnd="false"
-        android:layout_alignParentStart="false"
-        android:onClick="btnPokazWykres" />
+        android:layout_toLeftOf="@+id/filtrujB"
+        android:layout_toStartOf="@+id/filtrujB"
+        android:textSize="15dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -69,15 +71,19 @@
         android:id="@+id/textView2"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textSize="18dp"
+        android:textColor="#ffffffff" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=" New Text"
-        android:id="@+id/textView3"
+        android:id="@+id/textViewIleOp"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/textView2"
-        android:layout_toEndOf="@+id/textView2" />
+        android:layout_toEndOf="@+id/textView2"
+        android:textSize="18dp"
+        android:textColor="#ffffffff" />
 
 </RelativeLayout>
