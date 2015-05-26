@@ -145,17 +145,25 @@ public class ZarzadcaBazy extends SQLiteOpenHelper {
     }
 
     public Cursor dajWszystkieOperacjeFiltruj(String dataOd, String dataDo, String typ, String kategoria, SQLiteDatabase baza) {
+        if (kategoria.equals("*")) {
+            String[] kolumny = {"k.Nazwa", "o.Data", "o.Kwota", "o.Opis"};
+            SQLiteDatabase db = baza;
+            Cursor kursor = db.rawQuery("select k.Nazwa,o.Data,o.Kwota,o.Opis,o.Typ " +
+                    "from Operacja o join Kategoria k on o.Kategoria_id=k.Id_k " +
+                    "where o.Data BETWEEN Datetime('" + dataOd + "') and Datetime('" + dataDo + "') " +
+                    "and o.Typ='" + typ + "';", null);
+            return kursor;
+        } else {
+            String[] kolumny = {"k.Nazwa", "o.Data", "o.Kwota", "o.Opis"};
+            SQLiteDatabase db = baza;
+            Cursor kursor = db.rawQuery("select k.Nazwa,o.Data,o.Kwota,o.Opis,o.Typ " +
+                    "from Operacja o join Kategoria k on o.Kategoria_id=k.Id_k " +
+                    "where k.Nazwa='" + kategoria + "' " +
+                    "and o.Data BETWEEN Datetime('" + dataOd + "') and Datetime('" + dataDo + "') " +
+                    "and o.Typ='" + typ + "';", null);
+            return kursor;
 
-        String[] kolumny = {"k.Nazwa", "o.Data", "o.Kwota", "o.Opis"};
-        SQLiteDatabase db = baza;
-        Cursor kursor = db.rawQuery("select k.Nazwa,o.Data,o.Kwota,o.Opis,o.Typ " +
-                "from Operacja o join Kategoria k on o.Kategoria_id=k.Id_k " +
-                "where k.Nazwa='" + kategoria + "' " +
-                "and o.Data BETWEEN Datetime('"+dataOd+"') and Datetime('"+dataDo+"') " +
-                "and o.Typ='"+typ+"';", null);
-        return kursor;
-
-
+        }
     }
 
 
