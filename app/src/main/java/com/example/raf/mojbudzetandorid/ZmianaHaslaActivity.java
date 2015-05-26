@@ -11,7 +11,7 @@ import android.widget.EditText;
 
 
 public class ZmianaHaslaActivity extends ActionBarActivity {
-    private ZarzadcaBazy zarzadca= new ZarzadcaBazy(getBaseContext());
+    private ZarzadcaBazy zarzadca= new ZarzadcaBazy(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
