@@ -145,7 +145,15 @@ public class ZarzadcaBazy extends SQLiteOpenHelper {
     }
 
     public Cursor dajWszystkieOperacjeFiltruj(String dataOd, String dataDo, String typ, String kategoria, SQLiteDatabase baza) {
-        if (kategoria.equals("*")) {
+        if (typ.equals("Przychody")) {
+            String[] kolumny = {"k.Nazwa", "o.Data", "o.Kwota", "o.Opis"};
+            SQLiteDatabase db = baza;
+            Cursor kursor = db.rawQuery("select k.Nazwa,o.Data,o.Kwota,o.Opis,o.Typ " +
+                    "from Operacja o join Kategoria k on o.Kategoria_id=k.Id_k " +
+                    "where o.Typ='Przychod' " +
+                    "and o.Data BETWEEN Datetime('" + dataOd + "') and Datetime('" + dataDo + "') ;", null);
+            return kursor;
+        } else if (kategoria.equals("*") && !typ.equals("Przychody")) {
             String[] kolumny = {"k.Nazwa", "o.Data", "o.Kwota", "o.Opis"};
             SQLiteDatabase db = baza;
             Cursor kursor = db.rawQuery("select k.Nazwa,o.Data,o.Kwota,o.Opis,o.Typ " +
@@ -153,17 +161,7 @@ public class ZarzadcaBazy extends SQLiteOpenHelper {
                     "where o.Data BETWEEN Datetime('" + dataOd + "') and Datetime('" + dataDo + "') " +
                     "and o.Typ='" + typ + "';", null);
             return kursor;
-        } else if (kategoria.equals("Przychody")){
-            String[] kolumny = {"k.Nazwa", "o.Data", "o.Kwota", "o.Opis"};
-            SQLiteDatabase db = baza;
-            Cursor kursor = db.rawQuery("select k.Nazwa,o.Data,o.Kwota,o.Opis,o.Typ " +
-                    "from Operacja o join Kategoria k on o.Kategoria_id=k.Id_k " +
-                    "where o.Typ='" + kategoria + "' " +
-                    "and o.Data BETWEEN Datetime('" + dataOd + "') and Datetime('" + dataDo + "')",null);
-            return kursor;
-
-
-        }else  {
+        } else {
             String[] kolumny = {"k.Nazwa", "o.Data", "o.Kwota", "o.Opis"};
             SQLiteDatabase db = baza;
             Cursor kursor = db.rawQuery("select k.Nazwa,o.Data,o.Kwota,o.Opis,o.Typ " +
@@ -172,7 +170,6 @@ public class ZarzadcaBazy extends SQLiteOpenHelper {
                     "and o.Data BETWEEN Datetime('" + dataOd + "') and Datetime('" + dataDo + "') " +
                     "and o.Typ='" + typ + "';", null);
             return kursor;
-
         }
     }
 
@@ -180,7 +177,6 @@ public class ZarzadcaBazy extends SQLiteOpenHelper {
         String[] kolumny1 = {"o.Kwota"};
         String[] kolumny2 = {"o.Kwota"};
     }*/
-
 
 
 }

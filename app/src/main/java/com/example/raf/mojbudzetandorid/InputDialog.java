@@ -119,9 +119,6 @@ public class InputDialog extends DialogFragment implements  AdapterView.OnItemSe
                 Statystyki stat = new Statystyki();
                 String typ = spinner1.getSelectedItem().toString();
                 String kategoria = spinner2.getSelectedItem().toString();
-                if(!typ.equals("Wydatek")){
-                    typ="IS NOT NULL";
-                }
                 stat.budujTabelke(tv1.getText().toString(),tv2.getText().toString(),typ,kategoria);
                 getDialog().dismiss();
 
