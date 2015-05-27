@@ -49,5 +49,10 @@ public class ZmianaHaslaActivity extends ActionBarActivity {
         zarzadca.aktualizujUzytownika(1,ed.getText().toString());
         startActivity(PrzekEkranGlowny);
     }
+    public void Powrot(View view){
+        Intent i=new Intent(this, MainActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(i);
+    }
 
 }

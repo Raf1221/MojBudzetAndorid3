@@ -20,25 +20,6 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/LayoutData"
-        android:layout_below="@+id/LayoutCena"
-        android:layout_marginTop="7dp" >
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/LayoutUwagi"
-        android:layout_below="@+id/LayoutData"
-        android:layout_marginTop="7dp"
-        android:weightSum="1">
-
-    </LinearLayout>
-
 
     <Button
         android:layout_width="wrap_content"
@@ -71,14 +52,12 @@
         android:id="@+id/UwagiPrzychod"
         android:hint="Opis"
         android:layout_weight="1"
-        android:layout_below="@+id/DataWyswietla"
-        android:layout_alignLeft="@+id/DataWyswietla"
-        android:layout_alignStart="@+id/DataWyswietla"
-        android:layout_alignRight="@+id/CenaPrzychod"
-        android:layout_alignEnd="@+id/CenaPrzychod"
         android:textSize="25dp"
         android:textColor="#ffff0200"
-        android:textColorHint="#ffffffff" />
+        android:textColorHint="#ffffffff"
+        android:layout_alignTop="@+id/UwagiL"
+        android:layout_toLeftOf="@+id/Kalendarz_A"
+        android:layout_toStartOf="@+id/Kalendarz_A" />
 
     <Button
         android:layout_width="wrap_content"
@@ -89,10 +68,10 @@
         android:layout_above="@+id/UwagiPrzychod"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_toRightOf="@+id/DataWyswietla"
-        android:layout_toEndOf="@+id/DataWyswietla"
+        android:layout_toEndOf="@+id/CenaPrzychod"
         android:textSize="20dp"
-        android:textColor="#ffffffff" />
+        android:textColor="#ffffffff"
+        android:layout_toRightOf="@+id/CenaPrzychod" />
 
     <EditText
         android:layout_width="175dp"
@@ -101,26 +80,26 @@
         android:ems="10"
         android:id="@+id/DataWyswietla"
         android:hint="RRRR-MM-DD"
-        android:layout_alignTop="@+id/DataL"
-        android:layout_alignLeft="@+id/CenaPrzychod"
-        android:layout_alignStart="@+id/CenaPrzychod"
         android:textSize="25dp"
         android:textColor="#ffff0200"
-        android:textColorHint="#ffffffff" />
+        android:textColorHint="#ffffffff"
+        android:layout_below="@+id/DataL"
+        android:layout_toLeftOf="@+id/Kalendarz_A"
+        android:layout_toStartOf="@+id/Kalendarz_A" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Data:"
+        android:text="Kwota:"
         android:id="@+id/DataL"
         android:layout_weight="0.00"
         android:layout_marginTop="70dp"
-        android:layout_below="@+id/LayoutUwagi"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:textSize="25dp"
-        android:textColor="#ffffffff" />
+        android:textColor="#ffffffff"
+        android:layout_below="@+id/LayoutCena" />
 
     <EditText
         android:layout_width="175dp"
@@ -151,13 +130,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Kwota:"
+        android:text="Data:"
         android:id="@+id/KwotaLP"
         android:layout_weight="1.1"
-        android:layout_above="@+id/Kalendarz_A"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:textSize="25dp"
+        android:textColor="#ffffffff"
+        android:layout_alignBottom="@+id/DataWyswietla"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:text="Wyloguj"
+        android:id="@+id/button10"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/Kalendarz_A"
+        android:layout_alignStart="@+id/Kalendarz_A"
+        android:nestedScrollingEnabled="false"
+        android:onClick="Wyloguj"
         android:textColor="#ffffffff" />
 
 

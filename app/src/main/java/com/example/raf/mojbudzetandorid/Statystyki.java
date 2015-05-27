@@ -33,7 +33,7 @@ public class Statystyki extends ActionBarActivity {
     ZarzadcaBazy zb = new ZarzadcaBazy(this);
     public static boolean czyWlaczanyDialog = true;
     public static Context baseContext;
-    TextView tv1;
+    public static TextView tV1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +41,7 @@ public class Statystyki extends ActionBarActivity {
         setContentView(R.layout.activity_statystyki);
         final Button button = (Button) findViewById(R.id.BtnWykres);
         table_layout = (TableLayout) findViewById(R.id.tableLayout1);
-        tv1=(TextView)findViewById(R.id.textViewIleOp);
+        tV1=(TextView)findViewById(R.id.textViewIleOp);
         budujTabelke();
 
         Button btn = (Button) findViewById(R.id.filtrujB);
@@ -150,7 +150,7 @@ public class Statystyki extends ActionBarActivity {
             Cursor k3 = zb.dajWszystkieOperacje();
             int rows = k3.getCount();
             int cols = k3.getColumnCount();
-            tv1.setText(" "+rows);
+            tV1.setText(" "+rows);
             k3.moveToFirst();
             for (int i = 0; i < rows; i++) {
                 TableRow row = new TableRow(this);
@@ -188,6 +188,7 @@ public class Statystyki extends ActionBarActivity {
     public void budujTabelke(String dataOd, String dataDo, Object typ, Object kategoria) {
         try {
             table_layout.removeAllViews();
+
             if (dataOd.equals("")) {
                 Toast.makeText(getApplicationContext(), "Data od jest błędna", Toast.LENGTH_LONG).show();
             } else if (dataDo.equals("")) {
@@ -196,6 +197,7 @@ public class Statystyki extends ActionBarActivity {
 
                 Cursor k3 = zb.dajWszystkieOperacjeFiltruj(dataOd, dataDo, (String) typ, (String) kategoria,MainActivity.baza);
                 int rows = k3.getCount();
+
                 int cols = k3.getColumnCount();
                 k3.moveToFirst();
                 for (int i = 0; i < rows; i++) {
@@ -224,6 +226,7 @@ public class Statystyki extends ActionBarActivity {
                     } catch (Exception e) {
                     }
                 }
+                tV1.setText(" "+rows);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -240,5 +243,10 @@ public class Statystyki extends ActionBarActivity {
         inputDialog.setCancelable(true);
         inputDialog.setDialogTitle("Wybierz kryteria");
         inputDialog.show(manager, "Input Dialog");
+    }
+    public void Wyloguj(View view){
+        Intent i=new Intent(this, MainActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(i);
     }
 }

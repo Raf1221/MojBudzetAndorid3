@@ -55,5 +55,6 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:textSize="29dp"
-        android:textColor="#ffffffff" />
+        android:textColor="#ffffffff"
+        android:onClick="Powrot" />
 </RelativeLayout>

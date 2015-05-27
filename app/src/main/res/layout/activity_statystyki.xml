@@ -12,7 +12,7 @@
         android:layout_height="fill_parent"
         android:id="@+id/scrollView"
         android:layout_above="@+id/PowrotSB"
-        android:layout_below="@+id/textView2">
+        android:layout_below="@+id/button8">
 
         <TableLayout
             android:id="@+id/tableLayout1"
@@ -39,7 +39,8 @@
         android:id="@+id/PowrotSB"
         android:layout_alignParentBottom="true"
         android:onClick="Powrot"
-        android:textSize="15dp" />
+        android:textSize="20dp"
+        android:textColor="#ffffffff" />
 
     <Button
         android:layout_width="112dp"
@@ -50,7 +51,8 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:textSize="15dp" />
+        android:textSize="20dp"
+        android:textColor="#ffffffff" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -62,28 +64,40 @@
         android:layout_alignParentBottom="true"
         android:layout_toLeftOf="@+id/filtrujB"
         android:layout_toStartOf="@+id/filtrujB"
-        android:textSize="15dp" />
+        android:textSize="20dp"
+        android:textColor="#ffffffff" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Ilość operacji:"
         android:id="@+id/textView2"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:textSize="18dp"
-        android:textColor="#ffffffff" />
+        android:textColor="#ffffffff"
+        android:layout_above="@+id/scrollView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=" New Text"
         android:id="@+id/textViewIleOp"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/textView2"
-        android:layout_toEndOf="@+id/textView2"
         android:textSize="18dp"
-        android:textColor="#ffffffff" />
+        android:textColor="#ffffffff"
+        android:layout_alignTop="@+id/textView2"
+        android:layout_toRightOf="@+id/textView2"
+        android:layout_toEndOf="@+id/textView2" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:text="Wyloguj"
+        android:id="@+id/button8"
+        android:layout_alignRight="@+id/scrollView"
+        android:layout_alignEnd="@+id/scrollView"
+        android:textColor="#ffffffff"
+        android:onClick="Wyloguj" />
 
 </RelativeLayout>

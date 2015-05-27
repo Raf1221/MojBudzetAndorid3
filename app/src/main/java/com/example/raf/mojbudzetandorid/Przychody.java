@@ -128,4 +128,9 @@ public class Przychody extends ActionBarActivity{
         }
 
     }
+    public void Wyloguj(View view){
+        Intent i=new Intent(this, MainActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(i);
+    }
 }

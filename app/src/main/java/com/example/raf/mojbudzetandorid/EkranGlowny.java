@@ -54,4 +54,9 @@ public class EkranGlowny extends ActionBarActivity {
         startActivity(DodajDochody);
     }
 
+    public void Powrot(View view){
+        Intent i=new Intent(this, MainActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(i);
+    }
 }

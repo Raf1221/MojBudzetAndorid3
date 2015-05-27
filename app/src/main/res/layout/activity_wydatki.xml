@@ -5,7 +5,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.example.raf.mojbudzetandorid.Wydatki"
-    android:background="@drawable/background2">
+    android:background="@drawable/background3">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -31,7 +31,8 @@
             android:layout_alignTop="@+id/LayoutKategoria"
             android:layout_toRightOf="@+id/DodajA"
             android:layout_toEndOf="@+id/DodajA"
-            android:layout_marginLeft="49dp" />
+            android:layout_marginLeft="49dp"
+            android:background="#ff565656" />
 
 
     </LinearLayout>
@@ -110,9 +111,9 @@
         android:textSize="25dp"
         android:textColor="#ffff0006"
         android:textColorHint="#ffffffff"
-        android:layout_alignBottom="@+id/UwagiL"
-        android:layout_toLeftOf="@+id/Kalendarz_A"
-        android:layout_toStartOf="@+id/Kalendarz_A" />
+        android:layout_below="@+id/Kalendarz_A"
+        android:layout_alignLeft="@+id/DataWyswietla"
+        android:layout_alignStart="@+id/DataWyswietla" />
 
     <Button
         android:layout_width="wrap_content"
@@ -180,5 +181,17 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:text="Wyloguj"
+        android:id="@+id/button9"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/LayoutKategoria"
+        android:layout_alignEnd="@+id/LayoutKategoria"
+        android:onClick="Wyloguj"
+        android:textColor="#ffffffff" />
 
 </RelativeLayout>
