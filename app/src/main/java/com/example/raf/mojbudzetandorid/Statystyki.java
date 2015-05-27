@@ -25,7 +25,9 @@ import org.achartengine.renderer.SimpleSeriesRenderer;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 public class Statystyki extends ActionBarActivity {
@@ -57,53 +59,99 @@ public class Statystyki extends ActionBarActivity {
     }
 
     private void openChart() {
+        Set<String> codeSet = new HashSet<String>();
         List<String> codeI = new ArrayList<String>();
         List<Double> dystrybucjaI = new ArrayList<Double>();
+        class DoSsumowania{
+            private String typ;
+            private Double cena;
 
+            public String getTyp() {
+                return typ;
+            }
+
+            public Double getCena() {
+                return cena;
+            }
+
+            public void setCena(Double cena) {
+                this.cena = cena;
+            }
+
+            public void setTyp(String typ) {
+                this.typ = typ;
+            }
+        }
+        DoSsumowania doSsumowania;
+        boolean dodano= true;
+        List<DoSsumowania> doSsumowaniaLista= new ArrayList<DoSsumowania>();
         for (int i = 0, j = table_layout.getChildCount(); i < j; i++) {
+            doSsumowania = new DoSsumowania();
             View view = table_layout.getChildAt(i);
             TextView temp = null;
             if (view instanceof TableRow) {
                 TableRow t = (TableRow) view;
                 for (int k = 0, l = t.getChildCount(); k < l; k++) {
                     TextView text = (TextView) t.getChildAt(k);
+
                     if (!text.getText().equals("Przychod") & (k % 5) == 0) {
+                        dodano= codeSet.add(text.getText().toString());
+
                         codeI.add(text.getText().toString());
+                        doSsumowania.setTyp(text.getText().toString());
                     }
                     if (k == 2) {
                         temp = (TextView) t.getChildAt(k - 2);
                     }
                     if (temp != null && !temp.getText().equals("Przychod") & k != 0 & (k % 2) == 0 & k != 4) {
                         dystrybucjaI.add(Double.valueOf(text.getText().toString()));
+                        doSsumowania.setCena(Double.valueOf(text.getText().toString()));
+                        if(dodano==false){
+                            doSsumowaniaLista.add(doSsumowania);
+                        }
                     }
                 }
             }
         }
         boolean prawda = codeI.size() == dystrybucjaI.size() ? true : false;
         String[] code = new String[codeI.size()];
-        for (int i = 0; i < codeI.size(); i++) {
-            code[i] = codeI.get(i);
-        }
-
-        double[] dystrybucja = new double[dystrybucjaI.size()];
+        Double[] dystrybucja = new Double[dystrybucjaI.size()];
         for (int i = 0; i < dystrybucjaI.size(); i++) {
             dystrybucja[i] = dystrybucjaI.get(i);
         }
-        int[] kolory = new int[dystrybucjaI.size()];
+        for (int i = 0; i < codeI.size(); i++) {
+            code[i] = codeI.get(i);
+        }
+        Integer[] kolory = new Integer[dystrybucjaI.size()];
         for (int i = 0; i < dystrybucjaI.size(); i++) {
             int RGB = 0xff + 1;
             kolory[i] = Color.rgb((int) Math.floor(Math.random() * RGB), (int) Math.floor(Math.random() * RGB), (int) Math.floor(Math.random() * RGB));
         }
+        for(int i =0 ; i <codeI.size()-doSsumowaniaLista.size();i++){
+            for(int j = 0 ; j<dystrybucjaI.size()- doSsumowaniaLista.size(); j++){
+                if(j>i & codeI.get(i).equals(codeI.get(j))){
+                    code[j] = null ;
+                    dystrybucja[i]+=dystrybucja[j];
+                    dystrybucja[j]= null;
+                    kolory[j]=null;
+
+                }
+            }
+        }
+
         CategorySeries serieDystrybucji = new CategorySeries("Dane z tabeli");
         for (int i = 0; i < dystrybucja.length; i++) {
+            if(code[i]!=null && dystrybucja[i]!=null)
             serieDystrybucji.add(code[i] + " " + dystrybucja[i] + " PLN", dystrybucja[i]);
         }
         DefaultRenderer podstawowyRender = new DefaultRenderer();
         for (int i = 0; i < dystrybucja.length; i++) {
-            SimpleSeriesRenderer renderSerii = new SimpleSeriesRenderer();
-            renderSerii.setColor(kolory[i]);
-            renderSerii.setDisplayChartValues(true);
-            podstawowyRender.addSeriesRenderer(renderSerii);
+            if(kolory[i]!=null) {
+                SimpleSeriesRenderer renderSerii = new SimpleSeriesRenderer();
+                renderSerii.setColor(kolory[i]);
+                renderSerii.setDisplayChartValues(true);
+                podstawowyRender.addSeriesRenderer(renderSerii);
+            }
         }
         podstawowyRender.setBackgroundColor(Color.BLACK);
         podstawowyRender.setApplyBackgroundColor(true);
