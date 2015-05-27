@@ -176,6 +176,11 @@ public class ZarzadcaBazy extends SQLiteOpenHelper {
         }
     }
 
+   /* public Cursor Saldo(){
+        String[] kolumny1 = {"o.Kwota"};
+        String[] kolumny2 = {"o.Kwota"};
+    }*/
+
 
 
 }
