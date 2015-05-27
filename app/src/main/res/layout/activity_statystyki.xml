@@ -23,7 +23,7 @@
 
 
             android:shrinkColumns="*"
-            android:stretchColumns="*" >
+            android:stretchColumns="1" >
 
 
         </TableLayout>
