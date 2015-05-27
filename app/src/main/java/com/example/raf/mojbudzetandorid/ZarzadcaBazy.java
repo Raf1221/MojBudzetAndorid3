@@ -158,7 +158,7 @@ public class ZarzadcaBazy extends SQLiteOpenHelper {
             SQLiteDatabase db = baza;
             Cursor kursor = db.rawQuery("select k.Nazwa,o.Data,o.Kwota,o.Opis,o.Typ " +
                     "from Operacja o join Kategoria k on o.Kategoria_id=k.Id_k " +
-                    "where k.Nazwa='" + kategoria + "' " +
+                    "where o.Typ='" + kategoria + "' " +
                     "and o.Data BETWEEN Datetime('" + dataOd + "') and Datetime('" + dataDo + "')",null);
             return kursor;
 
