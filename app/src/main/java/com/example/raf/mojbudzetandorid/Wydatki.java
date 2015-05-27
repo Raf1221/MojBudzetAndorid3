@@ -45,8 +45,13 @@ public class Wydatki extends ActionBarActivity implements AdapterView.OnItemSele
         DataET=(EditText)findViewById(R.id.DataWyswietla);
         UwagiET=(EditText)findViewById(R.id.UwagiWydatek);
         baza= this.openOrCreateDatabase("BudzetDB3.db", MODE_ENABLE_WRITE_AHEAD_LOGGING, null);
-
-        ArrayAdapter adapter=ArrayAdapter.createFromResource(this,R.array.kategorie,android.R.layout.simple_spinner_item);
+        //ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.context_names, R.layout.my_spinner);
+        //ArrayAdapter adapter=ArrayAdapter.createFromResource(this,R.array.kategorie,android.R.layout.simple_spinner_item);
+        ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.kategorie, R.layout.my_spinner);
+        /*
+        ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.planets_array, R.layout.spinner_item);
+spinner.setAdapter(adapter);
+         */
         spinner.setAdapter(adapter);
 
         spinner.setOnItemSelectedListener(this);
@@ -148,6 +153,11 @@ public class Wydatki extends ActionBarActivity implements AdapterView.OnItemSele
             Toast.makeText(Wydatki.this,""+e,Toast.LENGTH_LONG).show();
         }
 
+    }
+    public void Wyloguj(View view){
+        Intent i=new Intent(this, MainActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(i);
     }
 
 }

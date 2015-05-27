@@ -115,53 +115,6 @@ public class InputDialog extends DialogFragment implements  AdapterView.OnItemSe
             @Override
             public void onClick(View v) {
 
-                /*try {
-                    Cursor k3 = zb.dajWszystkieOperacjeFiltruj(1);
-                    int rows=k3.getCount();
-                    int cols=k3.getColumnCount();
-                    //Toast.makeText(Statystyki.this, "liczba rows"+rows, Toast.LENGTH_SHORT).show();
-                    //Toast.makeText(Statystyki.this, "liczba cols"+cols, Toast.LENGTH_SHORT).show();
-                    k3.moveToFirst();
-
-
-
-
-
-                    for(int i=0;i<rows;i++){
-
-                        TableRow row=new TableRow(this);
-                        // row.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
-                        row.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
-                        row.setPadding(0,0,0,0);
-
-
-                        table_layout.addView(row);
-                        for(int j=0;j<cols;j++){
-                            TextView tv = new TextView(this);
-                            tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
-                                    TableRow.LayoutParams.WRAP_CONTENT));
-                            tv.setGravity(Gravity.CENTER);
-                            tv.setTextSize(16);
-                            tv.setPadding(0,0,0,0);
-
-                            tv.setText(k3.getString(j));
-
-                            row.addView(tv);
-
-                        }
-                        k3.moveToNext();
-
-                        try{
-                            table_layout.addView(row);
-                        }catch(Exception e){
-                            // Toast.makeText(Statystyki.this, "blad "+e, Toast.LENGTH_SHORT).show();
-                        }
-
-                        //table_layout.addView(row);
-                    }
-                }catch (Exception e){
-                    //Toast.makeText(Statystyki.this, "blad "+e, Toast.LENGTH_SHORT).show();
-                }*/
 
                 Statystyki stat = new Statystyki();
                 String typ = spinner1.getSelectedItem().toString();
