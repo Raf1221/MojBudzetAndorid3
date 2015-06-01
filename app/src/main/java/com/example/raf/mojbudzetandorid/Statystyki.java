@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.text.Layout;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,7 +23,6 @@ import org.achartengine.ChartFactory;
 import org.achartengine.model.CategorySeries;
 import org.achartengine.renderer.DefaultRenderer;
 import org.achartengine.renderer.SimpleSeriesRenderer;
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -217,7 +217,9 @@ public class Statystyki extends ActionBarActivity {
                         row.setBackgroundColor(Color.rgb(255, 102, 102));
                     }
                     row.addView(tv);
-
+                    if (j==2){
+                        row.setTextAlignment(Layout.DIR_LEFT_TO_RIGHT);
+                    }
                 }
                 k3.moveToNext();
 
