@@ -104,8 +104,8 @@ public class Statystyki extends ActionBarActivity {
                         temp = (TextView) t.getChildAt(k - 2);
                     }
                     if (temp != null && !temp.getText().equals("Przychod") & k != 0 & (k % 2) == 0 & k != 4) {
-                        dystrybucjaI.add(Double.valueOf(text.getText().toString()));
-                        doSsumowania.setCena(Double.valueOf(text.getText().toString()));
+                        dystrybucjaI.add(Double.valueOf(text.getText().toString().substring(0, text.getText().toString().indexOf(" PLN"))));
+                        doSsumowania.setCena(Double.valueOf(text.getText().toString().substring(0, text.getText().toString().indexOf(" PLN"))));
                         if(dodano==false){
                             doSsumowaniaLista.add(doSsumowania);
                         }

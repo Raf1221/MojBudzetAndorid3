@@ -145,39 +145,45 @@ public class ZarzadcaBazy extends SQLiteOpenHelper {
     }
 
     public Cursor dajWszystkieOperacjeFiltruj(String dataOd, String dataDo, String typ, String kategoria, SQLiteDatabase baza) {
-        if (typ.equals("Przychody")) {
-            String[] kolumny = {"k.Nazwa", "o.Data", "o.Kwota", "o.Opis"};
-            SQLiteDatabase db = baza;
-            Cursor kursor = db.rawQuery("select k.Nazwa,o.Data,o.Kwota,o.Opis,o.Typ " +
+        Cursor kursor = null;
+        String[] kolumny = {"k.Nazwa", "o.Data", "o.Kwota", "o.Opis"};
+        SQLiteDatabase db = baza;
+        if (typ.equals("Wydatek") && !kategoria.equals("*")) {
+            kursor = db.rawQuery("select k.Nazwa,o.Data,o.Kwota,o.Opis,o.Typ " +
                     "from Operacja o join Kategoria k on o.Kategoria_id=k.Id_k " +
-                    "where o.Typ='Przychod' " +
-                    "and o.Data BETWEEN Datetime('" + dataOd + "') and Datetime('" + dataDo + "') ;", null);
-            return kursor;
-        } else if (kategoria.equals("*") && !typ.equals("Przychody")) {
-            String[] kolumny = {"k.Nazwa", "o.Data", "o.Kwota", "o.Opis"};
-            SQLiteDatabase db = baza;
-            Cursor kursor = db.rawQuery("select k.Nazwa,o.Data,o.Kwota,o.Opis,o.Typ " +
-                    "from Operacja o join Kategoria k on o.Kategoria_id=k.Id_k " +
-                    "where o.Data BETWEEN Datetime('" + dataOd + "') and Datetime('" + dataDo + "') " +
-                    "and o.Typ='" + typ + "';", null);
-            return kursor;
-        } else if (kategoria.equals("*") && !typ.equals("Wszystko")) {
-            String[] kolumny = {"k.Nazwa", "o.Data", "o.Kwota", "o.Opis"};
-            SQLiteDatabase db = baza;
-            Cursor kursor = db.rawQuery("select k.Nazwa,o.Data,o.Kwota,o.Opis,o.Typ " +
-                    "from Operacja o join Kategoria k on o.Kategoria_id=k.Id_k " +
-                    "where o.Data BETWEEN Datetime('" + dataOd + "') and Datetime('" + dataDo + "'); ", null);
-            return kursor;
-        } else {
-            String[] kolumny = {"k.Nazwa", "o.Data", "o.Kwota", "o.Opis"};
-            SQLiteDatabase db = baza;
-            Cursor kursor = db.rawQuery("select k.Nazwa,o.Data,o.Kwota,o.Opis,o.Typ " +
-                    "from Operacja o join Kategoria k on o.Kategoria_id=k.Id_k " +
-                    "where k.Nazwa='" + kategoria + "' " +
-                    "and o.Data BETWEEN Datetime('" + dataOd + "') and Datetime('" + dataDo + "') " +
-                    "and o.Typ='" + typ + "';", null);
-            return kursor;
+                    "where o.Typ='" + kategoria + "' " +
+                    "and o.Data BETWEEN Datetime('" + dataOd + "') and Datetime('" + dataDo + "')", null);
         }
+        if (typ.equals("Wydatek") && kategoria.equals("*")) {
+            kursor = db.rawQuery("select k.Nazwa,o.Data,o.Kwota,o.Opis,o.Typ " +
+                    "from Operacja o join Kategoria k on o.Kategoria_id=k.Id_k " +
+                    "where o.Typ!='Przychod' " +
+                    "and o.Data BETWEEN Datetime('" + dataOd + "') and Datetime('" + dataDo + "')", null);
+        }
+        if (typ.equals("Przychody") && !kategoria.equals("*")) {
+            kursor = db.rawQuery("select k.Nazwa,o.Data,o.Kwota,o.Opis,o.Typ " +
+                    "from Operacja o join Kategoria k on o.Kategoria_id=k.Id_k " +
+                    "where o.Typ='" + kategoria + "' " +
+                    "and o.Data BETWEEN Datetime('" + dataOd + "') and Datetime('" + dataDo + "')", null);
+        }
+        if (typ.equals("Przychody") && kategoria.equals("*")) {
+            kursor = db.rawQuery("select k.Nazwa,o.Data,o.Kwota,o.Opis,o.Typ " +
+                    "from Operacja o join Kategoria k on o.Kategoria_id=k.Id_k " +
+                    "where o.Typ!='Przychod' " +
+                    "and o.Data BETWEEN Datetime('" + dataOd + "') and Datetime('" + dataDo + "')", null);
+        }
+        if (typ.equals("Wszystko") && !kategoria.equals("*")) {
+            kursor = db.rawQuery("select k.Nazwa,o.Data,o.Kwota,o.Opis,o.Typ " +
+                    "from Operacja o join Kategoria k on o.Kategoria_id=k.Id_k " +
+                    "where o.Typ='" + kategoria + "' " +
+                    "and o.Data BETWEEN Datetime('" + dataOd + "') and Datetime('" + dataDo + "')", null);
+        }
+        if(typ.equals("Wszystko") && kategoria.equals("*")){
+            kursor = db.rawQuery("select k.Nazwa,o.Data,o.Kwota,o.Opis,o.Typ from Operacja o join Kategoria k on o.Kategoria_id=k.Id_k" +
+                            " where o.Data BETWEEN Datetime('" + dataOd + "') and Datetime('" + dataDo + "')" +
+                            "order by o.Data;",null);
+        }
+        return kursor;
     }
 
    /* public Cursor Saldo(){
