@@ -328,7 +328,7 @@ public class Statystyki extends ActionBarActivity {
         String s2=k2.getString(0);
         double n1=Double.parseDouble(s1);
         double n2=Double.parseDouble(s2);
-       tvSaldoo.setText(df.format(n1-n2)+"PLN");
+       tvSaldoo.setText(df.format(n1-n2)+" PLN");
 
 
     }
