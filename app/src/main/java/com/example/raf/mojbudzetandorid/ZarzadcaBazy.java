@@ -186,10 +186,21 @@ public class ZarzadcaBazy extends SQLiteOpenHelper {
         return kursor;
     }
 
-   /* public Cursor Saldo(){
-        String[] kolumny1 = {"o.Kwota"};
-        String[] kolumny2 = {"o.Kwota"};
-    }*/
+   public Cursor SumaPrzychody(){
 
+
+       SQLiteDatabase db = getReadableDatabase();
+       Cursor kursor = db.rawQuery("select sum(Kwota) from Operacja where Typ='Przychod';", null);
+
+       return kursor;
+    }
+    public Cursor SumaWydatki(){
+
+
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor kursor = db.rawQuery("select sum(Kwota) from Operacja where Typ='Wydatek';", null);
+
+        return kursor;
+    }
 
 }
