@@ -7,7 +7,6 @@ import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.text.Layout;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -29,6 +28,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import static android.text.Layout.DIR_RIGHT_TO_LEFT;
 
 
 public class Statystyki extends ActionBarActivity {
@@ -220,7 +221,7 @@ public class Statystyki extends ActionBarActivity {
                     tv.setPadding(0, 0, 0, 0);
                     if (j==2){
                         tv.setText(k3.getString(j)+ " PLN");
-                        row.setTextAlignment(Layout.DIR_LEFT_TO_RIGHT);
+                        row.setTextAlignment(DIR_RIGHT_TO_LEFT);
                         row.addView(tv);
                     }else {
                         tv.setText(k3.getString(j));
