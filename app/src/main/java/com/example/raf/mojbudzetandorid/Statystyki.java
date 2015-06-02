@@ -272,12 +272,21 @@ public class Statystyki extends ActionBarActivity {
                         tv.setGravity(Gravity.CENTER);
                         tv.setTextSize(14);
                         tv.setPadding(0, 0, 0, 0);
+                        if (j==2){
+                            tv.setText(k3.getString(j)+ " PLN");
+                            row.setTextAlignment(DIR_RIGHT_TO_LEFT);
+                            row.addView(tv);
+                        }else {
+                            tv.setText(k3.getString(j));
+                            if (k3.getString(j).equals("Wydatek")) {
+                                row.setBackgroundColor(Color.rgb(255, 102, 102));
+                            }
+                            row.addView(tv);
+                        }
                         tv.setText(k3.getString(j));
                         if (k3.getString(j).equals("Wydatek")) {
                             row.setBackgroundColor(Color.rgb(255, 102, 102));
                         }
-                        row.addView(tv);
-
                     }
                     k3.moveToNext();
 
