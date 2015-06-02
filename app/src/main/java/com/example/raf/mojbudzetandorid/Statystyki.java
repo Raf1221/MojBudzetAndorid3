@@ -219,8 +219,8 @@ public class Statystyki extends ActionBarActivity {
                     tv.setPadding(0, 0, 0, 0);
                     if (j==2){
                         tv.setText(k3.getString(j)+ " PLN");
-                        row.setGravity(Gravity.LEFT);
                         row.addView(tv);
+                        row.setGravity(Gravity.LEFT);
                     }else {
                         tv.setText(k3.getString(j));
                         if (k3.getString(j).equals("Wydatek")) {
@@ -272,8 +272,8 @@ public class Statystyki extends ActionBarActivity {
                         tv.setPadding(0, 0, 0, 0);
                         if (j==2){
                             tv.setText(k3.getString(j) + " PLN");
-                            row.setGravity(Gravity.LEFT);
                             row.addView(tv);
+                            row.setGravity(Gravity.LEFT);
                         }else {
                             tv.setText(k3.getString(j));
                             if (k3.getString(j).equals("Wydatek")) {
