@@ -223,7 +223,7 @@ public class Statystyki extends ActionBarActivity {
                     tv.setTextSize(14);
                     tv.setPadding(0, 0, 0, 0);
                     if (j==2){
-                        tv.setText(k3.getString(j)+ " PLN");
+                        tv.setText(k3.getString(j));
                         row.addView(tv);
                         row.setGravity(Gravity.LEFT);
                     }else {
@@ -276,7 +276,7 @@ public class Statystyki extends ActionBarActivity {
                         tv.setTextSize(14);
                         tv.setPadding(0, 0, 0, 0);
                         if (j==2){
-                            tv.setText(k3.getString(j) + " PLN");
+                            tv.setText(k3.getString(j));
                             row.addView(tv);
                             row.setGravity(Gravity.LEFT);
                         }else {
