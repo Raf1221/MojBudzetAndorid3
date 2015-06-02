@@ -211,17 +211,17 @@ public class Statystyki extends ActionBarActivity {
                 row.setPadding(0, 0, 0, 0);
                 table_layout.addView(row);
                 for (int j = 0; j < cols; j++) {
-                    TextView tv = new TextView(baseContext);
+                    TextView tv = new TextView(this);
+                    tv.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,
+                            LayoutParams.WRAP_CONTENT));
+                    tv.setGravity(Gravity.CENTER);
                     tv.setTextSize(14);
                     tv.setPadding(0, 0, 0, 0);
                     if (j==2){
                         tv.setText(k3.getString(j)+ " PLN");
-                        row.setTextAlignment(Gravity.LEFT);
+                        row.setGravity(Gravity.LEFT);
                         row.addView(tv);
                     }else {
-                        tv.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,
-                                LayoutParams.WRAP_CONTENT));
-                        tv.setGravity(Gravity.CENTER);
                         tv.setText(k3.getString(j));
                         if (k3.getString(j).equals("Wydatek")) {
                             row.setBackgroundColor(Color.rgb(255, 102, 102));
@@ -265,16 +265,16 @@ public class Statystyki extends ActionBarActivity {
                     table_layout.addView(row);
                     for (int j = 0; j < cols; j++) {
                         TextView tv = new TextView(baseContext);
+                        tv.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,
+                                LayoutParams.WRAP_CONTENT));
+                        tv.setGravity(Gravity.CENTER);
                         tv.setTextSize(14);
                         tv.setPadding(0, 0, 0, 0);
                         if (j==2){
-                            tv.setText(k3.getString(j)+ " PLN");
-                            row.setTextAlignment(Gravity.LEFT);
+                            tv.setText(k3.getString(j) + " PLN");
+                            row.setGravity(Gravity.LEFT);
                             row.addView(tv);
                         }else {
-                            tv.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,
-                                    LayoutParams.WRAP_CONTENT));
-                            tv.setGravity(Gravity.CENTER);
                             tv.setText(k3.getString(j));
                             if (k3.getString(j).equals("Wydatek")) {
                                 row.setBackgroundColor(Color.rgb(255, 102, 102));
