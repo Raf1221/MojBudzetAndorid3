@@ -24,6 +24,7 @@ import org.achartengine.model.CategorySeries;
 import org.achartengine.renderer.DefaultRenderer;
 import org.achartengine.renderer.SimpleSeriesRenderer;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -36,7 +37,7 @@ public class Statystyki extends ActionBarActivity {
     public static boolean czyWlaczanyDialog = true;
     public static Context baseContext;
     public static TextView tV1;
-
+    DecimalFormat df = new DecimalFormat("#.##");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +45,8 @@ public class Statystyki extends ActionBarActivity {
         final Button button = (Button) findViewById(R.id.BtnWykres);
         table_layout = (TableLayout) findViewById(R.id.tableLayout1);
         tV1=(TextView)findViewById(R.id.textViewIleOp);
+
+
         budujTabelke();
 
         Button btn = (Button) findViewById(R.id.filtrujB);
@@ -56,6 +59,9 @@ public class Statystyki extends ActionBarActivity {
         };
         btnWykres.setOnClickListener(clickListener);
         baseContext = getBaseContext();
+        Saldo();
+
+
     }
 
     private void openChart() {
@@ -301,5 +307,21 @@ public class Statystyki extends ActionBarActivity {
         Intent i=new Intent(this, MainActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
+    }
+    public void Saldo(){
+
+        Cursor k1 = zb.SumaPrzychody();
+        Cursor k2 = zb.SumaWydatki();
+        TextView tvSaldoo=(TextView)findViewById(R.id.tvSaldo);
+        k1.moveToFirst();
+        k2.moveToFirst();
+
+        String s1=k1.getString(0);
+        String s2=k2.getString(0);
+        double n1=Double.parseDouble(s1);
+        double n2=Double.parseDouble(s2);
+       tvSaldoo.setText(df.format(n1-n2)+"PLN");
+
+
     }
 }
