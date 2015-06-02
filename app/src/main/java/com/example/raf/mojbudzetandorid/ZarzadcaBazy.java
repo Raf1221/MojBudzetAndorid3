@@ -151,7 +151,7 @@ public class ZarzadcaBazy extends SQLiteOpenHelper {
         if (typ.equals("Wydatek") && !kategoria.equals("*")) {
             kursor = db.rawQuery("select k.Nazwa,o.Data,o.Kwota,o.Opis,o.Typ " +
                     "from Operacja o join Kategoria k on o.Kategoria_id=k.Id_k " +
-                    "where o.Typ='"+kategoria+"' " +
+                    "where k.Nazwa='"+kategoria+"' " +
                     "and o.Data BETWEEN Datetime('" + dataOd + "') and Datetime('" + dataDo + "')", null);
         }
         if (typ.equals("Wydatek") && kategoria.equals("*")) {
